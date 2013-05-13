@@ -117,6 +117,7 @@
 						使用（按下去「已使用次數」會增加5，並且標示最過去的五次記錄為used）
 						-->
 						<!--滿五次會使用.success標示-->
+						<!--加入分頁功能-->
 					</table>
 					<input type="submit" value="標記選取的項目為已使用" class="btn btn-primary" />
 				</form>
