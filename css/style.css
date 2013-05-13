@@ -1,0 +1,39 @@
+
+.form_login{
+	width:300px;
+	height:200px;
+	position:absolute;
+	top:50%;
+	left:50%;
+	margin-top:-200px;
+	margin-left:-150px;
+	font-size:130%;
+	font-family: 微軟正黑體;
+	
+}
+.form_login h2{
+	text-align:center;
+}
+body{
+	background:lightgrey;
+	font-family:微軟正黑體;
+}
+.main{
+	background:white;
+	min-height:300px;
+	margin-top:40px;
+}
+.main h1,h2,h3{
+	text-align:center;
+}
+.content{
+	width:70%;
+	margin:0px auto;
+}
+.addUser{
+	width:40%;
+	margin:0px auto;
+}
+.editRecord .used{
+	color:red;
+}
