@@ -54,7 +54,7 @@
 				<div class="page-header"><h1>新增用戶</h1></div>
 				<div class="addUser content">
 					<fieldset>
-					<form action="module/addUser.php" method="post">
+					<form action="control/control.php" method="post">
 						
 							<table>
 								<tr>
@@ -79,6 +79,7 @@
 								</tr>
 								
 							</table>
+							<input type="hidden" name="cmd" value="adduser"/>
 					</form>
 					</fieldset>
 				</div>

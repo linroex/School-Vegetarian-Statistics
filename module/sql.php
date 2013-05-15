@@ -13,6 +13,7 @@
 			
 	}catch(Exception $e){
 		echo "連線失敗，錯誤訊息：{$e->getMessage()}";
+		exit();
 	}
 	
 ?>
