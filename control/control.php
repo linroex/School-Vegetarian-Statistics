@@ -8,7 +8,7 @@
 			$_SESSION['login_status']=1;
 			header("Location:../addRecord.php");
 		}else{
-			$_SESSION['message']='帳號或密碼錯誤';
+			$_SESSION['msg']='帳號或密碼錯誤';
 			header("Location:../index.php");
 		}
 	}

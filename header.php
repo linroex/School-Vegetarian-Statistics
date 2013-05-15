@@ -1,4 +1,9 @@
 <?php
 	session_start();
-	
+	if(!strstr($_SERVER['PHP_SELF'],'index.php')){
+		if(!$_SESSION[login_status]){
+			$_SESSION['msg']='此頁面需登入才可檢視';
+			header("Location:index.php");
+		}
+	}
 ?>

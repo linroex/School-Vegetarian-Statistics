@@ -19,9 +19,9 @@
 					<input type="text" class="span4" name="usernm" id="usernm" placeholder="請輸入帳號"/><br />
 					<input type="password" class="span4" name="passwd" id="passwd" placeholder="請輸入密碼" /><br />
 					<?php
-						if(isset($_SESSION['message'])){
-							echo '<div class="error">' , $_SESSION['message'] ,'</div><br />';
-							unset($_SESSION['message']);
+						if(isset($_SESSION['msg'])){
+							echo '<div class="error">' , $_SESSION['msg'] ,'</div><br />';
+							unset($_SESSION['msg']);
 						}
 					?>
 					<input type="submit" class="loginbtn span4 btn btn-large btn-block btn-primary" value="登入" />
