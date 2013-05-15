@@ -1,3 +1,4 @@
+<?php include('header.php') ?>
 <!DOCTYPE HTML>
 <html lang="en-US">
 	<head>
@@ -42,7 +43,7 @@
 						
 					</ul>
 					<ul class="pull-right nav">
-						<li><a>XXX</a></li>
+						<li><a><?=$_SESSION['user']['name']?></a></li>
 						<li><a href="logout.php">登出</a></li>
 					</ul>
 				</div>

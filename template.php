@@ -1,8 +1,9 @@
+<?php include('header.php') ?>
 <!DOCTYPE HTML>
 <html lang="en-US">
 	<head>
 		<meta charset="UTF-8">
-		<title>衛生組疏食統計系統 ｜XXX</title>
+		<title>衛生組疏食統計系統 ｜<?=$_SESSION['user']['name']?></title>
 		<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css" media="all" />
 		<link rel="stylesheet" type="text/css" href="css/style.css" media="all" />
 		<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
@@ -42,7 +43,7 @@
 						
 					</ul>
 					<ul class="pull-right nav">
-						<li><a>XXX</a></li>
+						<li><a><?=$_SESSION['user']['name']?></a></li>
 						<li><a href="logout.php">登出</a></li>
 					</ul>
 				</div>
