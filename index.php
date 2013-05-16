@@ -1,4 +1,5 @@
 <?php include('header.php') ?>
+<?php if($_SESSION['login_status']){header("Location:addRecord.php");} //已經登入的用戶，直接導向新增記錄頁面?>
 <!DOCTYPE HTML>
 <html lang="en-US">
 	<head>

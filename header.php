@@ -5,5 +5,6 @@
 			$_SESSION['msg']='此頁面需登入才可檢視';
 			header("Location:index.php");
 		}
+		
 	}
 ?>

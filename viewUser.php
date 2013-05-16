@@ -55,6 +55,11 @@
 				<h1>檢視用戶</h1>
 			</div>
 			<div class="viewUser content">
+				<?php
+					include('module/oth_function.php');
+					
+					var_dump(post('http://' . $_SERVER['SERVER_NAME'] .  '/school/control/control.php',array('cmd'=>'viewuser')));
+				?>
 				<form action="" method="post">
 					<table class="table table-hover">
 						<tr>

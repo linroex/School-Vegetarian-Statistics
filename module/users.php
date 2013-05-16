@@ -1,4 +1,5 @@
 <?php
+	
 	include('sql.php');
 	include('oth_function.php');
 	class users{
@@ -34,6 +35,9 @@
 			}else{
 				return "兩次密碼輸入不相同";
 			}
+		}
+		function viewUser(){
+			return iterator_to_array($this->col_users->find());
 		}
 	}
 	

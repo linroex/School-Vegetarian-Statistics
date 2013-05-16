@@ -1,17 +1,26 @@
 <?php
 	session_start();
 	include('../module/users.php');
+	
 	$users=new users($db);
+	
 	if($_POST['cmd']=='login'){
 		
 		if($users->login($_POST['usernm'],$_POST['passwd'])){
 			$_SESSION['user']=$users->getUserInfo($_POST['usernm'],$_POST['passwd']);
-			$_SESSION['login_status']=1;
+			$_SESSION['login_status']=true;
 			header("Location:../addRecord.php");
 		}else{
 			$_SESSION['msg']='帳號或密碼錯誤';
 			header("Location:../index.php");
 		}
+	}
+	
+	//wait to fix
+	//防止未登入的用戶存取此頁面
+	if(!$_SESSION['login_status']){
+		var_dump($_SESSION['user']);
+		exit();
 	}
 	
 	if($_POST['cmd']=='adduser'){
@@ -21,6 +30,10 @@
 		}else{
 			$_SESSION['msg']=$status;
 		}
+	}
+	
+	if($_POST['cmd']=='viewuser'){
+		echo json_encode($users->viewUser());
 	}
 	
 	$mongo->close();
