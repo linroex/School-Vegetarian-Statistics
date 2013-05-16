@@ -55,7 +55,7 @@
 				<h1>檢視用戶</h1>
 			</div>
 			<div class="viewUser content">
-				<form action="" method="post">
+				<form action="control/control.php" method="post">
 					<table class="table table-hover">
 						<tr>
 							<td style="width:5%;"></td>
@@ -66,12 +66,12 @@
 						<?php 
 							include('module/oth_function.php');
 							$UserList=json_decode(post('/control/control.php',array('cmd'=>'viewuser','login_status'=>$_SESSION['login_status'])),true);
-			
+							
 							foreach($UserList as $UserTemp){
 							
 						?>
 						<tr>
-							<td><input type="checkbox" name="id" value="<?=$UserTemp['_id']['$id']?>"/></td>
+							<td><input type="checkbox" name="id[]" value="<?=$UserTemp['_id']['$id']?>"/></td>
 							<td><?=$UserTemp['name']?></td>
 							<td><?=$UserTemp['usernm']?></td>
 							<td><a href="editUser.php?id=<?=$UserTemp['_id']['$id']?>"><input type="button" value="編輯" class="btn"/></a></td>
@@ -79,7 +79,9 @@
 						<?php } ?>
 					</table>
 					<input type="submit" class="btn btn-primary" value="刪除選定帳號" />
+					<input type="hidden" name="cmd" value="batchdeluser"/>
 				</form>
+				
 			</div>
 		</div>
 	</body>

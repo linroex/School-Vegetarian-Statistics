@@ -38,11 +38,40 @@
 					return '此帳號已有人使用過';
 				}
 			}else{
-				return "兩次密碼輸入不相同";
+				return '兩次密碼輸入不相同';
 			}
 		}
 		function viewUser(){
 			return iterator_to_array($this->col_users->find());
+		}
+		function updateUser($userid,$name,$new_passwd='',$new_passwd_retry='',$remove=false){
+			$info=secunity(array($userid,$name,$new_passwd,$new_passwd_retry));
+			
+			if($remove=='true'){
+				$response=$this->col_users->remove(array('_id'=>new MongoId($info[0])));
+				return '已移除';
+			}
+			if($info[2]==$info[3]){
+				if($info[2]!=''){
+					$this->col_users->update(array('_id'=>new MongoId($info[0])),array('$set'=>array('name'=>$info[1],'passwd'=>md5($info[2]))));
+				}elseif($info[2]==''){
+					$this->col_users->update(array('_id'=>new MongoId($info[0])),array('$set'=>array('name'=>$info[1])));
+				}
+				return '已修改';
+			}elseif($info[2]!=$info[3]){
+				return '兩次密碼輸入不相同';
+			}
+		}
+		function batchDelUser($userid){
+			$info=secunity($userid);
+			if(is_array($info)){
+				foreach($info as $uid){
+					$this->col_users->remove(array('_id'=>new MongoId($uid)));
+				}
+			}else{
+					$this->col_users->remove(array('_id'=>new MongoId($info)));
+			}
+			return '指定的用戶已移除';
 		}
 	}
 	

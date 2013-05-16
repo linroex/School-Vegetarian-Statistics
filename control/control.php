@@ -41,5 +41,18 @@
 		echo json_encode($users->getUserInfoById($_POST['userid']));
 	}
 	
+	if($_POST['cmd']=='edituser'){
+		try{
+			$_SESSION['msg']=$users->updateUser($_POST['userid'],$_POST['name'],$_POST['passwd'],$_POST['retry-passwd'],$_POST['removeUser']);
+			
+		}catch(Exception $e){
+			$_SESSION['msg']=$e->getMessage();
+		}
+		header("Location:../viewUser.php");
+	}
+	if($_POST['cmd']=='batchdeluser'){
+		$_SESSION['msg']=$users->batchDelUser($_POST['id']);
+		header("Location:../viewUser.php");
+	}
 	$mongo->close();
 ?>
