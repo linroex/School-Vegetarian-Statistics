@@ -16,9 +16,14 @@
 				return '0';
 			}
 		}
-		function getUserInfo($usernm,$passwd){
+		function getUserInfoByAuth($usernm,$passwd){
 			$info=secunity(array($usernm,$passwd));
 			return $this->col_users->findOne(array('usernm'=>$info[0],'passwd'=>md5($info[1])));
+		}
+		function getUserInfoById($userid){
+			
+			return $this->col_users->findOne(array('_id'=>new MongoId($userid)));
+			
 		}
 		function addUser($name,$usernm,$passwd,$retrypw){
 			$info=secunity(array($name,$usernm,$passwd,$retrypw));

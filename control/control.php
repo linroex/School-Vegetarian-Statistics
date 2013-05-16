@@ -7,7 +7,7 @@
 	if($_POST['cmd']=='login'){
 		
 		if($users->login($_POST['usernm'],$_POST['passwd'])){
-			$_SESSION['user']=$users->getUserInfo($_POST['usernm'],$_POST['passwd']);
+			$_SESSION['user']=$users->getUserInfoByAuth($_POST['usernm'],$_POST['passwd']);
 			$_SESSION['login_status']=true;
 			header("Location:../addRecord.php");
 		}else{
@@ -16,11 +16,11 @@
 		}
 	}
 	
-	//wait to fix
 	//防止未登入的用戶存取此頁面
-	if(!$_SESSION['login_status']){
-		var_dump($_SESSION['user']);
-		exit();
+	if($_POST['login_status']!=1){
+		if(!$_SESSION['login_status']){
+			exit('Please Login');
+		}
 	}
 	
 	if($_POST['cmd']=='adduser'){
@@ -30,10 +30,15 @@
 		}else{
 			$_SESSION['msg']=$status;
 		}
+		header("Location:../viewUser.php");
 	}
 	
 	if($_POST['cmd']=='viewuser'){
 		echo json_encode($users->viewUser());
+	}
+	
+	if($_POST['cmd']=='getUserData'){
+		echo json_encode($users->getUserInfoById($_POST['userid']));
 	}
 	
 	$mongo->close();

@@ -55,11 +55,20 @@
 				<h1>編輯用戶</h1>
 			</div>
 			<div class="content">
+				<?php
+					include('module/oth_function.php');
+					$data= json_decode(post('/control/control.php',array('cmd'=>'getUserData','login_status'=>$_SESSION['login_status'],'userid'=>$_GET['id'])),true);
+					
+				?>
 				<form action="module/editUser.php" method="post">
 					<table>
 						<tr>
+							<td>姓名</td>
+							<td><input type="text" name="name" value="<?=$data['name']?>" /></td>
+						</tr>
+						<tr>
 							<td>帳號：</td>
-							<td><input type="text" value="linroex" disabled="disabled" /></td>
+							<td><input type="text" value="<?=$data['usernm']?>" disabled="disabled" /></td>
 						</tr>
 						<tr>
 							<td>修改密碼：</td>
@@ -70,10 +79,15 @@
 							<td><input type="password" name="retry-passwd" placeholder="請在輸入一次"/>（如果沒有要修改密碼，此欄請留空）</td>
 						</tr>
 						<tr>
+							<td>移除帳戶：</td>
+							<td ><input type="radio" name="removeUser" value="false" checked/>保留 &nbsp &nbsp <input type="radio" name="removeUser" value="true" />移除</td>
+						</tr>
+						<tr>
 							<td></td>
-							<td><input type="submit" value="送出" class="btn btn-primary" />&nbsp <input type="button" value="回前頁" class="btn " /></td>
+							<td><br /><input type="submit" value="送出" class="btn btn-primary" />&nbsp <input type="button" value="回前頁" class="btn " /></td>
 						</tr>
 					</table>
+					<input type="hidden" name="cmd" value="edituser" />
 				</form>
 			</div>
 		</div>

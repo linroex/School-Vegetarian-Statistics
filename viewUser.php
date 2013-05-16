@@ -55,11 +55,6 @@
 				<h1>檢視用戶</h1>
 			</div>
 			<div class="viewUser content">
-				<?php
-					include('module/oth_function.php');
-					
-					var_dump(post('http://' . $_SERVER['SERVER_NAME'] .  '/school/control/control.php',array('cmd'=>'viewuser')));
-				?>
 				<form action="" method="post">
 					<table class="table table-hover">
 						<tr>
@@ -68,13 +63,20 @@
 							<td style="width:30%;">帳號</td>
 							<td style="width:10%;">編輯</td>
 						</tr>
+						<?php 
+							include('module/oth_function.php');
+							$UserList=json_decode(post('/control/control.php',array('cmd'=>'viewuser','login_status'=>$_SESSION['login_status'])),true);
+			
+							foreach($UserList as $UserTemp){
+							
+						?>
 						<tr>
-							<td><input type="checkbox" name=""/></td>
-							<td>林熙哲</td>
-							<td>linroex</td>
-							<td><a href="editUser.php"><input type="button" value="編輯" class="btn"/></a></td>
+							<td><input type="checkbox" name="id" value="<?=$UserTemp['_id']['$id']?>"/></td>
+							<td><?=$UserTemp['name']?></td>
+							<td><?=$UserTemp['usernm']?></td>
+							<td><a href="editUser.php?id=<?=$UserTemp['_id']['$id']?>"><input type="button" value="編輯" class="btn"/></a></td>
 						</tr>
-						
+						<?php } ?>
 					</table>
 					<input type="submit" class="btn btn-primary" value="刪除選定帳號" />
 				</form>

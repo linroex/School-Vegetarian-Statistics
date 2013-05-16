@@ -14,7 +14,7 @@
 	function post($target,$data){
 		$curl=curl_init();
 		$options = array(
-			CURLOPT_URL=>$target,
+			CURLOPT_URL=>'http://' . $_SERVER['SERVER_NAME'] . dirname($_SERVER['PHP_SELF']) . (substr(trim($target),1,1)=='/'?'':'/') . $target,
 			CURLOPT_HEADER=>0,
 			CURLOPT_VERBOSE=>0,
 			CURLOPT_RETURNTRANSFER=>true,
