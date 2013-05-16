@@ -54,7 +54,7 @@
 			<div class="page-header"><h1>編輯記錄</h1></div>
 			<div class="editRecord content">
 			<table class="table" >
-				<form action="module/editRecord.php" method="post">
+				<form action="model/editRecord.php" method="post">
 					<tr>
 						<td>學號：</td>
 						<td></td>

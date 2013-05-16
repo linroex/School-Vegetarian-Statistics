@@ -1,6 +1,6 @@
 <?php
 	session_start();
-	include('../module/users.php');
+	include('../model/users.php');
 	
 	$users=new users($db);
 	
@@ -25,12 +25,12 @@
 	
 	if($_POST['cmd']=='adduser'){
 		$status=$users->addUser($_POST['name'],$_POST['usernm'],$_POST['passwd'],$_POST['retry-passwd']);
-		if($status['ok']){
-			$_SESSION['msg']='建立新用戶成功';
+		$_SESSION['msg']=$status;
+		if($status=='兩次密碼輸入不相同'){
+			header("Location:../addUser.php");
 		}else{
-			$_SESSION['msg']=$status;
+			header("Location:../viewUser.php");
 		}
-		header("Location:../viewUser.php");
 	}
 	
 	if($_POST['cmd']=='viewuser'){

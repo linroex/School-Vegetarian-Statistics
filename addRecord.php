@@ -63,7 +63,7 @@
 			</div>
 			<div class="addRecord content">
 				<fieldset>
-					<form action="module/addRecord.php" method="post">
+					<form action="model/addRecord.php" method="post">
 						
 							日期：<br /><input type="text" id="datepicker" placeholder="請輸入日期，預設為當日"/><br />
 							學號：<br />

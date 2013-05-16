@@ -56,7 +56,7 @@
 			</div>
 			<div class="content">
 				<?php
-					include('module/oth_function.php');
+					include('model/model_func.php');
 					$data= json_decode(post('/control/control.php',array('cmd'=>'getUserData','login_status'=>$_SESSION['login_status'],'userid'=>$_GET['id'])),true);
 					
 				?>

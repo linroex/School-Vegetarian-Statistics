@@ -1,5 +1,5 @@
 <?php
-	include('module/sql.php');
+	include('model/sql.php');
 	$col_users=$db->users;
 	if($col_users->count()==0){
 		try{

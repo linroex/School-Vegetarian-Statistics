@@ -1,7 +1,7 @@
 <?php
 	
 	include('sql.php');
-	include('oth_function.php');
+	include('model_func.php');
 	class users{
 		var $col_users;
 		function __construct($sqlhandle){
@@ -30,7 +30,8 @@
 			if($info[2]==$info[3]){
 				if($this->col_users->count(array('usernm'=>$info[1]))==0){
 					try{
-						return $this->col_users->insert(array('name'=>$info[0],'usernm'=>$info[1],'passwd'=>md5($info[2])));
+						$this->col_users->insert(array('name'=>$info[0],'usernm'=>$info[1],'passwd'=>md5($info[2])));
+						return '建立新用戶成功';
 					}catch(Exception $e){
 						return $e->getMessage();
 					}

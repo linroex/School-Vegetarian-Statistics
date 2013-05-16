@@ -55,8 +55,8 @@
 				<h1>系統設定</h1>
 			</div>
 			<div class="setting content">
-				<input type="button" value="清空資料庫" class="btn" />
-				<h3>目前還想不到有什麼系統設定要做的...</h3>
+				
+				<h3>目前還想不到有什麼系統設定要做的...XD</h3>
 			</div>
 		</div>
 	</body>

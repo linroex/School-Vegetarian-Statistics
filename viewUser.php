@@ -64,7 +64,7 @@
 							<td style="width:10%;">編輯</td>
 						</tr>
 						<?php 
-							include('module/oth_function.php');
+							include('model/model_func.php');
 							$UserList=json_decode(post('/control/control.php',array('cmd'=>'viewuser','login_status'=>$_SESSION['login_status'])),true);
 							
 							foreach($UserList as $UserTemp){
