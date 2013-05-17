@@ -83,7 +83,7 @@
 					</form>
 					</fieldset>
 				</div>
-			
 		</div>
+		<?php notify(); ?>
 	</body>
 </html>

@@ -1,8 +1,7 @@
 <?php
 	function secunity($var){
-		
-		$i=0;
 		if(is_array($var)){
+			$i=0;
 			foreach($var as $var_temp){
 				if(!get_magic_quotes_gpc){
 					$var_temp=addslashes($var_temp);

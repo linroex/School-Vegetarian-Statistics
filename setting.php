@@ -59,5 +59,6 @@
 				<h3>目前還想不到有什麼系統設定要做的...XD</h3>
 			</div>
 		</div>
+		<?php notify(); ?>
 	</body>
 </html>

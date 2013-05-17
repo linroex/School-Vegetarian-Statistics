@@ -1,18 +1,20 @@
 <?php
 	session_start();
 	include('../model/users.php');
-	
+	include('../model/records.php');
 	$users=new users($db);
-	
+	$records=new records($db);
 	if($_POST['cmd']=='login'){
 		
 		if($users->login($_POST['usernm'],$_POST['passwd'])){
 			$_SESSION['user']=$users->getUserInfoByAuth($_POST['usernm'],$_POST['passwd']);
 			$_SESSION['login_status']=true;
 			header("Location:../addRecord.php");
+			exit();
 		}else{
 			$_SESSION['msg']='帳號或密碼錯誤';
 			header("Location:../index.php");
+			exit();
 		}
 	}
 	
@@ -28,8 +30,10 @@
 		$_SESSION['msg']=$status;
 		if($status=='兩次密碼輸入不相同'){
 			header("Location:../addUser.php");
+			exit();
 		}else{
 			header("Location:../viewUser.php");
+			exit();
 		}
 	}
 	
@@ -49,10 +53,18 @@
 			$_SESSION['msg']=$e->getMessage();
 		}
 		header("Location:../viewUser.php");
+		exit();
 	}
 	if($_POST['cmd']=='batchdeluser'){
 		$_SESSION['msg']=$users->batchDelUser($_POST['id']);
 		header("Location:../viewUser.php");
+		exit();
 	}
+	if($_POST['cmd']=='addrecord'){
+		$_SESSION['msg']=$records->addRecord($_POST['date'],$_POST['stuid']);
+		header("Location:../viewRecord.php");
+		exit();
+	}
+	
 	$mongo->close();
 ?>

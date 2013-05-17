@@ -124,5 +124,6 @@
 				</form>
 			</div>
 		</div>
+		<?php notify(); ?>
 	</body>
 </html>
