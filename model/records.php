@@ -13,16 +13,19 @@
 			if($date==''){
 				$date=date('Y/m/d');
 			}
-			foreach($num as $num_temp){
-				$this->col_records->insert(array('date'=>new MongoDate(strtotime($date)),'stuid'=>$num_temp,'used'=>false));
+			if(trim($stuid)==''){
+				return '請輸入要記錄的學號';
+			}else{
+				foreach($num as $num_temp){
+					$this->col_records->insert(array('date'=>new MongoDate(strtotime($date)),'stuid'=>$num_temp,'used'=>false));
+				}
+				return '新增完成';
 			}
-			return '新增完成';
+
 		}
 		function listRecord(){
 		
-		}
-		
-		
+		}		
 		function getSemester(){
 			//第X學年度Y學期
 		}
