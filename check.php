@@ -3,20 +3,14 @@
 <html lang="en-US">
 	<head>
 		<meta charset="UTF-8">
-		<title>衛生組疏食統計系統 ｜ 增加記錄</title>
+		<title>衛生組疏食統計系統 ｜ 確認增加記錄</title>
 		<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css" media="all" />
 		<link rel="stylesheet" type="text/css" href="css/style.css" media="all" />
-		<link rel="stylesheet" type="text/css" href="js/jquery-ui/css/smoothness/jquery-ui-1.10.3.custom.min.css" media="all" />
-		
 		<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
 		<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
-		<script type="text/javascript" src="js/jquery-ui/jquery-ui-1.10.3.custom.min.js"></script>
+		
 		<script type="text/javascript">
-			$('.dropdown-toggle').dropdown();
-						
-			$(function() {
-				$( "#datepicker" ).datepicker();
-			});
+			$('.dropdown-toggle').dropdown()
 		</script>
 	</head>
 	<body>
@@ -58,24 +52,32 @@
 		
 		<div class="container main">
 			<div class="page-header">
-				<h1>增加記錄</h1>
-				
+				<h1>確認</h1>
 			</div>
-			<div class="addRecord content">
-			
-				<fieldset>
-					<form action="check.php" method="post">
-							
-							日期：<br /><input type="text" id="datepicker" name="date" placeholder="請輸入日期，預設為當日"/><br />
-							學號：<br />
-							<textarea class="span8" name="stuid" rows="4" placeholder="請輸入學號，並以半型逗號區隔"></textarea><br />
-							<input type="submit" class="btn btn-primary" value="送出" /> &nbsp <input class="btn" type="reset" value="清空" />
-						
-					</form>
-				</fieldset>
-				
+			<div class="content">
+				<form action="control/control.php" method="post">
+					<table class="table">
+						<tr>
+							<td>學號</td>
+							<td>姓名</td>
+						</tr>
+						<?php
+							$stuid=explode(',',$_POST['stuid']);
+							foreach($stuid as $idtemp){
+						?>
+						<tr>
+							<td><?=$idtemp?></td>
+							<td>XXX</td>
+						</tr>
+						<?php } ?>
+					</table>
+					<input type="hidden" name="cmd" value="addrecord"/>
+					<input type="submit" value="確認完畢，送出" class="btn btn-primary" />
+					<input type="button" value="回前頁修改" onclick="window.history.go(-1);" class="btn" />
+				</form>
 			</div>
 		</div>
 		<?php notify(); ?>
+		
 	</body>
 </html>
