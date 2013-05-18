@@ -55,20 +55,27 @@
 				<h1>檢視記錄</h1>
 			</div>
 			<div class="viewRecord content">
-				<form action="" method="post">
+				
+				<form action="" method="get">
 					<p style="text-align:center;"><b>以下資料為第
-					<select class="span1" name="academic_year">
-						<option value="99">99</option>
-						<option value="100">100</option>
-					</select>
+					<?=date('m')<7?date('Y')-1912:date('Y')-1911;?>
 					學年度
 						<select class="span1" name="semester">
-							<option value="上">上</option>
-							<option value="下">下</option>
+							<?php
+								if(isset($_GET['semester'])){
+									$semester=$_GET['semester'];
+								}else{
+									$semester=date('m')<8?1:0;
+								}
+								
+							?>
+							
+							<option value="0" <?=$semester==0?'selected':'';?>>上</option>
+							<option value="1" <?=$semester==1?'selected':'';?>>下</option>
 						</select>
 					學期之記錄</b>&nbsp<input type="submit" value="Go" class="btn btn-small" /></p>
 					<!--PHP 預設值會自動偵測時間並改變-->
-					<!--使用Ajax-->
+					
 				</form>
 				<form action="" method="post">
 					<table class="table">

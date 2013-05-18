@@ -31,6 +31,11 @@
 		}		
 		function getSemester(){
 			//第X學年度Y學期
+			$date=array('year'=>(date('Y')-1911),'month'=>date('m'));
+			
+			$date['year']=($date['month']<7?$date['year']-1:$date['year']);
+			$date['month']=($date['month']<8?1:0);	//0代表上學期，1代表下學期
+			return $date;
 		}
 		function getRecordInfo(){
 		
