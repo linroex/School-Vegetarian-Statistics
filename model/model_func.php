@@ -3,12 +3,13 @@
 		if(is_array($var)){
 			$i=0;
 			foreach($var as $var_temp){
+				
 				$var_temp=htmlspecialchars($var_temp);
 				$result[$i]=trim($var_temp);
 				$i++;
 			}
 		}else{
-			$result=trim($var);
+			$result=trim(htmlspecialchars($var));
 		}
 		return $result;
 	}
