@@ -74,9 +74,10 @@
 							<option value="1" <?=$semester==1?'selected':'';?>>下</option>
 						</select>
 					學期之記錄</b>&nbsp<input type="submit" value="Go" class="btn btn-small" /></p>
-					<!--PHP 預設值會自動偵測時間並改變-->
+					
 					
 				</form>
+
 				<form action="" method="post">
 					<table class="table">
 						<tr>
@@ -86,35 +87,27 @@
 							<td class="td_total" style="width:10%;">總次數</td>
 							<td class="td_surplus"  style="width:10%;">剩餘次數</td>
 							<td class="td_detail" style="width:8%;">檢視</td>
-							<td class="td_done"  style="width:8%;">使用</td>
+							
 						</tr>
-						<tr >
-							<td class="td_select" style="width:5%;"><input type="checkbox" name="batch_used[]"/></td>
-							<td class="td_stuid" style="width:10%;">91504</td>
-							<td class="td_name" style="width:10%;">林熙哲</td>
-							<td class="td_total" style="width:10%;">20</td>
-							<td class="td_surplus"  style="width:10%;">4</td>
-							<td class="td_detail" style="width:8%;"><a href="editRecord.php"><input type="button" class="btn" value="檢視" /></a></td>
-							<td class="td_done"  style="width:8%;"><input type="button" value="使用" class="btn" /></td>
+						<?php
+							include('model/model_func.php');
+							
+							$recordsData=json_decode(post('/control/control.php',array('cmd'=>'viewrecord','semester'=>$_GET['semester'],'login_status'=>$_SESSION['login_status'])),true);
+							
+							if(!empty($recordsData)){
+								foreach($recordsData as $recordtemp){
+								
+						?>
+						<tr class="<?=($recordtemp['total']-$recordtemp['used'])>=5?'success':'';?>">
+							<td class="td_select" style="width:5%;"><input type="checkbox" name="batch_used[]" value="<?=$recordtemp['stuid']?>" /></td>
+							<td class="td_stuid" style="width:10%;"><?=$recordtemp['stuid']?></td>
+							<td class="td_name" style="width:10%;">XXX</td>
+							<td class="td_total" style="width:10%;"><?=$recordtemp['total']?></td>
+							<td class="td_surplus"  style="width:10%;"><?=$recordtemp['total']-$recordtemp['used']?></td>
+							<td class="td_detail" style="width:8%;"><a href="editRecord.php/?stuid=<?=$recordtemp['stuid']?>"><input type="button" class="btn" value="檢視" /></a></td>
+							
 						</tr>
-						<tr class="success">
-							<td class="td_select" style="width:5%;"><input type="checkbox" name="batch_used[]"/></td>
-							<td class="td_stuid" style="width:10%;">91504</td>
-							<td class="td_name" style="width:10%;">林熙哲</td>
-							<td class="td_total" style="width:10%;">20</td>
-							<td class="td_surplus"  style="width:10%;">4</td>
-							<td class="td_detail" style="width:8%;"><a href="editRecord.php"><input type="button" class="btn" value="檢視" /></a></td>
-							<td class="td_done"  style="width:8%;"><input type="button" value="使用" class="btn" /></td>
-						</tr>
-						<tr >
-							<td class="td_select" style="width:5%;"><input type="checkbox" name="batch_used[]"/></td>
-							<td class="td_stuid" style="width:10%;">91504</td>
-							<td class="td_name" style="width:10%;">林熙哲</td>
-							<td class="td_total" style="width:10%;">20</td>
-							<td class="td_surplus"  style="width:10%;">4</td>
-							<td class="td_detail" style="width:8%;"><a href="editRecord.php"><input type="button" class="btn" value="檢視" /></a></td>
-							<td class="td_done"  style="width:8%;"><input type="button" value="使用" class="btn" /></td>
-						</tr>
+						<?php }}?>
 						<!--
 						多選（批次完成「使用」動作）
 						學號

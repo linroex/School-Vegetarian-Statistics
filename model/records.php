@@ -3,8 +3,10 @@
 	include_once('model_func.php');
 	class records{
 		var $col_records;
+		
 		function __construct($sqlhandle){
 			$this->col_records=$sqlhandle->records;
+			
 		}
 		function addRecord($date,$stuid){
 			//注意user_num只有一筆的情況
@@ -19,7 +21,7 @@
 				foreach($num as $num_temp){
 					$num_temp=secunity($num_temp);
 					if(trim($num_temp)!=''){
-						$this->col_records->insert(array('date'=>new MongoDate(strtotime($date)),'stuid'=>$num_temp,'used'=>false,'semester'=>date('m')<8?1:0));
+						$this->col_records->insert(array('date'=>new MongoDate(strtotime($date)),'stuid'=>$num_temp,'used'=>false,'semester'=>date('m',strtotime($date))<8?1:0));
 						//1=下學期，0=下學期
 					}
 				}
@@ -27,12 +29,30 @@
 			}
 
 		}
-		function listRecord($semester){
-			$semester=secunity($semester);
-			if($semester==''){
-				$semester=$date['month']<8?1:0;
+		function listRecord($_semester){
+			$_semester=secunity($_semester);
+			
+			if($_semester==''){
+				$_semester=$date['month']<8?1:0;
+			}else{
+				$_semester=(int)$_semester;
 			}
-			//wait to done
+			
+			$i=0;
+			
+			$data=$this->col_records->distinct('stuid',array('semester'=>$_semester));
+			asort($data);
+			foreach($data as $stuid){
+				$result[$i]=array(
+					'stuid'=>$stuid,
+					'name'=>'XXX',
+					'total'=>$this->col_records->find(array('stuid'=>$stuid,'semester'=>$_semester))->count(),
+					'used'=>$this->col_records->find(array('stuid'=>$stuid,'used'=>true,'semester'=>$_semester))->count()
+				);
+				$i++;
+			}
+			return $result;
+			
 		}		
 		function getRecordInfo(){
 		

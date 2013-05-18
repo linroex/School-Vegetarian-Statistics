@@ -65,6 +65,9 @@
 		header("Location:../viewRecord.php");
 		exit();
 	}
-	
+	if($_POST['cmd']=='viewrecord'){
+		
+		echo json_encode($records->listRecord($_POST['semester']));
+	}
 	$mongo->close();
 ?>
