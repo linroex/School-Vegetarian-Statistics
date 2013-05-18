@@ -57,19 +57,22 @@
 			<div class="content">
 				<form action="control/control.php" method="post">
 					<table class="table">
+						<input type="hidden" name="date" value=<?=$_POST['date']==''?'""': '"' . $_POST['date'] . '"'?> />
+						<input type="hidden" name="stuid" value=<?=$_POST['stuid']==''?'""':str_replace("\n",',','"' . $_POST['stuid']) . '"'?> />
 						<tr>
 							<td>學號</td>
 							<td>姓名</td>
 						</tr>
 						<?php
-							$stuid=explode(',',$_POST['stuid']);
+							$stuid=explode("\n",$_POST['stuid']);
 							foreach($stuid as $idtemp){
+								if(trim($idtemp)!=''){
 						?>
 						<tr>
 							<td><?=$idtemp?></td>
 							<td>XXX</td>
 						</tr>
-						<?php } ?>
+						<?php }} ?>
 					</table>
 					<input type="hidden" name="cmd" value="addrecord"/>
 					<input type="submit" value="確認完畢，送出" class="btn btn-primary" />

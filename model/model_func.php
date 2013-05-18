@@ -3,9 +3,7 @@
 		if(is_array($var)){
 			$i=0;
 			foreach($var as $var_temp){
-				if(!get_magic_quotes_gpc){
-					$var_temp=addslashes($var_temp);
-				}
+				$var_temp=htmlspecialchars($var_temp);
 				$result[$i]=trim($var_temp);
 				$i++;
 			}

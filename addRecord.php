@@ -68,7 +68,7 @@
 							
 							日期：<br /><input type="text" id="datepicker" name="date" placeholder="請輸入日期，預設為當日"/><br />
 							學號：<br />
-							<textarea class="span8" name="stuid" rows="4" placeholder="請輸入學號，並以半型逗號區隔"></textarea><br />
+							<textarea class="span8" name="stuid" rows="4" placeholder="請輸入學號，一行一筆資料"></textarea><br />
 							<input type="submit" class="btn btn-primary" value="送出" /> &nbsp <input class="btn" type="reset" value="清空" />
 						
 					</form>

@@ -17,7 +17,10 @@
 				return '請輸入要記錄的學號';
 			}else{
 				foreach($num as $num_temp){
-					$this->col_records->insert(array('date'=>new MongoDate(strtotime($date)),'stuid'=>$num_temp,'used'=>false));
+					$num_temp=secunity($num_temp);
+					if(trim($num_temp)!=''){
+						$this->col_records->insert(array('date'=>new MongoDate(strtotime($date)),'stuid'=>$num_temp,'used'=>false));
+					}
 				}
 				return '新增完成';
 			}
