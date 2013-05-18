@@ -39,10 +39,12 @@
 	
 	if($_POST['cmd']=='viewuser'){
 		echo json_encode($users->viewUser());
+		exit();
 	}
 	
 	if($_POST['cmd']=='getUserData'){
 		echo json_encode($users->getUserInfoById($_POST['userid']));
+		exit();
 	}
 	
 	if($_POST['cmd']=='edituser'){
@@ -68,6 +70,7 @@
 	if($_POST['cmd']=='viewrecord'){
 		
 		echo json_encode($records->listRecord($_POST['semester']));
+		exit();
 	}
 	$mongo->close();
 ?>
