@@ -19,24 +19,21 @@
 				foreach($num as $num_temp){
 					$num_temp=secunity($num_temp);
 					if(trim($num_temp)!=''){
-						$this->col_records->insert(array('date'=>new MongoDate(strtotime($date)),'stuid'=>$num_temp,'used'=>false));
+						$this->col_records->insert(array('date'=>new MongoDate(strtotime($date)),'stuid'=>$num_temp,'used'=>false,'semester'=>date('m')<8?1:0));
+						//1=下學期，0=下學期
 					}
 				}
 				return '新增完成';
 			}
 
 		}
-		function listRecord(){
-		
+		function listRecord($semester){
+			$semester=secunity($semester);
+			if($semester==''){
+				$semester=$date['month']<8?1:0;
+			}
+			//wait to done
 		}		
-		function getSemester(){
-			//第X學年度Y學期
-			$date=array('year'=>(date('Y')-1911),'month'=>date('m'));
-			
-			$date['year']=($date['month']<7?$date['year']-1:$date['year']);
-			$date['month']=($date['month']<8?1:0);	//0代表上學期，1代表下學期
-			return $date;
-		}
 		function getRecordInfo(){
 		
 		}
