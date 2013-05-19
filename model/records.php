@@ -60,8 +60,18 @@
 		function editRecord(){
 		
 		}
-		function setRecordUsed(){
-		
+		function setRecordUsed($stuid,$semester,$surplus){
+			if($surplus<5){
+				echo '未滿五筆';
+				echo $surplus;
+			}else{
+				$semester=(int)secunity($semester);
+				$stuid=secunity($stuid);
+				//修改				
+				$data=$this->col_records->find(array('stuid'=>$stuid,'semester'=>$semester,'used'=>false),array('_id'=>1))->sort(array('date'=>1))->limit(5);
+				//return array('stuid'=>$stuid,'semester'=>$semester,'used'=>false);
+				return ($data);
+			}
 		}
 	}
 ?>

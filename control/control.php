@@ -72,5 +72,21 @@
 		echo json_encode($records->listRecord($_POST['semester']));
 		exit();
 	}
+	if($_POST['cmd']=='setused'){
+		$temp=explode(',',$_POST['batch_used']);
+		
+		foreach($_POST['batch_used'] as $temp){
+			
+			$data=explode(',',$temp);
+			echo '<pre>';
+			$t=$records->setRecordUsed($data[0],$_POST['semester'],$data[1]);
+			foreach($t as $temp){
+				var_dump($temp['_id']);
+				exit();
+			}
+			
+		}
+		
+	}
 	$mongo->close();
 ?>

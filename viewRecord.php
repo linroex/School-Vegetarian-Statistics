@@ -78,16 +78,25 @@
 					
 				</form>
 
-				<form action="" method="post">
+				<form action="control/control.php" method="post">
+					<?php
+						if(isset($_GET['semester']) and $_GET['semester']!=''){
+							$semester=$_GET['semester'];
+							
+						}else{
+							$semester=date('m')<8?1:0;
+						}
+					?>
+					<input type="hidden" name="cmd" value="setused" />
+					<input type="hidden" name="semester" value="<?=$semester;?>" />
 					<table class="table">
 						<tr>
-							<td class="td_select" style="width:5%;"></td>
-							<td class="td_stuid" style="width:10%;">學號</td>
-							<td class="td_name" style="width:10%;">姓名</td>
-							<td class="td_total" style="width:10%;">總次數</td>
-							<td class="td_surplus"  style="width:10%;">剩餘次數</td>
-							<td class="td_detail" style="width:8%;">檢視</td>
-							
+							<td style="width:5%;"></td>
+							<td style="width:10%;">學號</td>
+							<td style="width:10%;">姓名</td>
+							<td style="width:10%;">總次數</td>
+							<td style="width:10%;">剩餘次數</td>
+							<td style="width:8%;">檢視</td>
 						</tr>
 						<?php
 							include('model/model_func.php');
@@ -96,15 +105,19 @@
 							
 							if(!empty($recordsData)){
 								foreach($recordsData as $recordtemp){
+								$surplus=$recordtemp['total']-$recordtemp['used'];
 								
 						?>
+						
+						
 						<tr class="<?=($recordtemp['total']-$recordtemp['used'])>=5?'success':'';?>">
-							<td class="td_select" style="width:5%;"><input type="checkbox" name="batch_used[]" value="<?=$recordtemp['stuid']?>" /></td>
-							<td class="td_stuid" style="width:10%;"><?=$recordtemp['stuid']?></td>
-							<td class="td_name" style="width:10%;">XXX</td>
-							<td class="td_total" style="width:10%;"><?=$recordtemp['total']?></td>
-							<td class="td_surplus"  style="width:10%;"><?=$recordtemp['total']-$recordtemp['used']?></td>
-							<td class="td_detail" style="width:8%;"><a href="editRecord.php/?stuid=<?=$recordtemp['stuid']?>"><input type="button" class="btn" value="檢視" /></a></td>
+							<td style="width:5%;"><input type="checkbox" name="batch_used[]" value="<?="{$recordtemp['stuid']},{$surplus}"?>" /></td>
+							<td style="width:10%;"><?=$recordtemp['stuid']?></td>
+							<td style="width:10%;">XXX</td>
+							<td style="width:10%;"><?=$recordtemp['total']?></td>
+							<td style="width:10%;"><?=$surplus?></td>
+							<td style="width:8%;"><a href="editRecord.php/?stuid=<?=$recordtemp['stuid']?>"><input type="button" class="btn" value="檢視" /></a></td>
+							
 							
 						</tr>
 						<?php }}?>
