@@ -62,15 +62,21 @@
 		}
 		function setRecordUsed($stuid,$semester,$surplus){
 			if($surplus<5){
-				echo '未滿五筆';
-				echo $surplus;
+				return '未滿五筆';
+				
 			}else{
 				$semester=(int)secunity($semester);
 				$stuid=secunity($stuid);
 				//修改				
-				$data=$this->col_records->find(array('stuid'=>$stuid,'semester'=>$semester,'used'=>false),array('_id'=>1))->sort(array('date'=>1))->limit(5);
-				//return array('stuid'=>$stuid,'semester'=>$semester,'used'=>false);
-				return ($data);
+				$id=$this->col_records->find(array('stuid'=>$stuid,'semester'=>$semester,'used'=>false),array('_id'=>1))->sort(array('date'=>1))->limit(5);
+				foreach($id as $idtemp){
+					try{
+						$this->col_records->update(array('_id'=>$idtemp['_id']),array('$set'=>array('used'=>true)));
+					}catch(Exception $e){
+						return $e->getMessage();
+					}
+				}
+				return '已設為使用';
 			}
 		}
 	}
