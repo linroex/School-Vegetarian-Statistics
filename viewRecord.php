@@ -73,7 +73,13 @@
 							<option value="0" <?=$semester==0?'selected':'';?>>上</option>
 							<option value="1" <?=$semester==1?'selected':'';?>>下</option>
 						</select>
-					學期之記錄</b>&nbsp<input type="submit" value="Go" class="btn btn-small" /></p>
+					學期之記錄</b>&nbsp 
+					<select class="span2" name="sort">
+						<option value="stuid">按已達成排序</option>
+						<option value="used">按學號排序</option>
+					</select>
+					<input type="submit" value="Go" class="btn" />
+					</p>
 					
 					
 				</form>
@@ -89,6 +95,7 @@
 					?>
 					<input type="hidden" name="cmd" value="setused" />
 					<input type="hidden" name="semester" value="<?=$semester;?>" />
+					
 					<table class="table">
 						<tr>
 							<td style="width:5%;"></td>
@@ -101,7 +108,7 @@
 						<?php
 							include('model/model_func.php');
 							
-							$recordsData=json_decode(post('/control/control.php',array('cmd'=>'viewrecord','semester'=>$_GET['semester'],'login_status'=>$_SESSION['login_status'])),true);
+							$recordsData=json_decode(post('/control/control.php',array('cmd'=>'viewrecord','semester'=>$_GET['semester'],'login_status'=>$_SESSION['login_status'],'sort'=>isset($_GET['sort']) and $_GET['sort']!=''?$_GET['sort']:'stuid')),true);
 							
 							if(!empty($recordsData)){
 								foreach($recordsData as $recordtemp){
@@ -116,7 +123,7 @@
 							<td style="width:10%;">XXX</td>
 							<td style="width:10%;"><?=$recordtemp['total']?></td>
 							<td style="width:10%;"><?=$surplus?></td>
-							<td style="width:8%;"><a href="editRecord.php/?stuid=<?=$recordtemp['stuid']?>"><input type="button" class="btn" value="檢視" /></a></td>
+							<td style="width:8%;"><a href="editRecord.php?stuid=<?=$recordtemp['stuid']?>"><input type="button" class="btn" value="檢視" /></a></td>
 							
 							
 						</tr>
@@ -133,6 +140,7 @@
 						<!--滿五次會使用.success標示-->
 						<!--加入分頁功能-->
 					</table>
+					
 					<input type="submit" value="標記選取的項目為已使用" class="btn btn-primary" />
 				</form>
 			</div>

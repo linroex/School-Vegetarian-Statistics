@@ -29,9 +29,9 @@
 			}
 
 		}
-		function listRecord($_semester){
+		function listRecord($_semester,$sort){
 			$_semester=secunity($_semester);
-			
+			$sort=secunity($sort);
 			if($_semester==''){
 				$_semester=$date['month']<8?1:0;
 			}else{
@@ -47,7 +47,7 @@
 					'stuid'=>$stuid,
 					'name'=>'XXX',
 					'total'=>$this->col_records->find(array('stuid'=>$stuid,'semester'=>$_semester))->count(),
-					'used'=>$this->col_records->find(array('stuid'=>$stuid,'used'=>true,'semester'=>$_semester))->count()
+					'used'=>$this->col_records->find(array('stuid'=>$stuid,'used'=>true,'semester'=>$_semester))->count()					
 				);
 				$i++;
 			}

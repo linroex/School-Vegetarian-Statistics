@@ -76,7 +76,7 @@
 	}
 	if($_POST['cmd']=='viewrecord'){
 		
-		echo json_encode($records->listRecord($_POST['semester']));
+		echo json_encode($records->listRecord($_POST['semester'],$_POST['sort']));
 		_exit($mongo);
 	}
 	if($_POST['cmd']=='setused'){

@@ -81,7 +81,7 @@
 					</tr>
 					<tr>
 						<td><input type="submit" value="刪除選定記錄" class="btn btn-primary btn-block" /></td>
-						<td><input type="button" value="不變動，回前頁" class="btn btn-block" /></td>
+						<td><input type="button" value="不變動，回前頁" class="btn btn-block" onclick="window.history.go(-1);"/></td>
 						
 					</tr>
 				</form>
