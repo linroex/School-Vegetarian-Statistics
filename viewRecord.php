@@ -116,7 +116,7 @@
 							<td style="width:10%;">XXX</td>
 							<td style="width:10%;"><?=$recordtemp['total']?></td>
 							<td style="width:10%;"><?=$surplus?></td>
-							<td style="width:8%;"><a href="editRecord.php/?stuid=<?=$recordtemp['stuid']?>"><input type="button" class="btn" value="檢視" /></a></td>
+							<td style="width:8%;"><a href="editRecord.php?stuid=<?=$recordtemp['stuid']?>"><input type="button" class="btn" value="檢視" /></a></td>
 							
 							
 						</tr>
