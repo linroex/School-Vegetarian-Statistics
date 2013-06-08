@@ -58,11 +58,17 @@
 			$stuid=secunity($stuid);
 			$semester=(int)secunity($semester);
 			return iterator_to_array($this->col_records->find(array('stuid'=>$stuid,'semester'=>$semester)));
-			
-			
 		}
-		function removeRecord(){
-		
+		function removeRecord($id){
+			$id=secunity($id);
+			if(is_array($id)){
+				foreach($id as $id_temp){
+					$this->col_records->remove(array('_id'=>new MongoId($id_temp)));
+				}
+			}else{
+				$this->col_records->remove(array('_id'=>new MongoId($id)));
+			}
+			return '已刪除指定記錄';
 		}
 		function setRecordUsed($stuid,$semester,$surplus){
 			if($surplus<5){

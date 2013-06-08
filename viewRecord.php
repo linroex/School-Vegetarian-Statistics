@@ -73,11 +73,7 @@
 							<option value="0" <?=$semester==0?'selected':'';?>>上</option>
 							<option value="1" <?=$semester==1?'selected':'';?>>下</option>
 						</select>
-					學期之記錄</b>&nbsp 
-					<select class="span2" name="sort">
-						<option value="stuid">按已達成排序</option>
-						<option value="used">按學號排序</option>
-					</select>
+					學期之記錄</b>
 					<input type="submit" value="Go" class="btn" />
 					</p>
 					

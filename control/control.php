@@ -95,5 +95,9 @@
 		echo json_encode($records->getRecordInfo($_POST['stuid'],$_POST['semester']));
 		_exit($mongo);
 	}
-	
+	if($_POST['cmd']=='removeRecord'){
+		$_SESSION['msg']=$records->removeRecord($_POST['deleteRecord']);
+		header('Location:../viewRecord.php');
+		_exit($mongo);
+	}
 ?>

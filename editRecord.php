@@ -57,7 +57,7 @@
 				<form action="control/control.php" method="post">
 					<input type="hidden" name="semester" value="<?=$_GET['semester']?>" />
 					<input type="hidden" name="stuid" value="<?=$_GET['stuid']?>" />
-					
+					<input type="hidden" name="cmd" value="removeRecord"/>
 					<tr>
 						<td colspan="2">學號：<?=$_GET['stuid']?></td>
 						
