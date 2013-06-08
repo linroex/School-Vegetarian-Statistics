@@ -29,5 +29,28 @@
 		curl_close($curl);
 		return $result;
 	}
+	function get_client_ip(){
+		foreach (array(
+					'HTTP_CLIENT_IP',
+					'HTTP_X_FORWARDED_FOR',
+					'HTTP_X_FORWARDED',
+					'HTTP_X_CLUSTER_CLIENT_IP',
+					'HTTP_FORWARDED_FOR',
+					'HTTP_FORWARDED',
+					'REMOTE_ADDR') as $key) {
+			if (array_key_exists($key, $_SERVER)) {
+				return $_SERVER[$key];
+			}
+		}
+		return null;
+	}
+	function insertLog($db,$user,$type,$text){
+		file_put_contents('../log.php',json_encode(array('type'=>trim($type),'text'=>trim(htmlspecialchars($text)),'date'=>new MongoDate(time()),'ip'=>get_client_ip(),'user'=>trim($user))) . "\n",FILE_APPEND);
+		return $db->log->insert(array('type'=>trim($type),'text'=>trim(htmlspecialchars($text)),'date'=>new MongoDate(time()),'ip'=>get_client_ip(),'user'=>trim($user)));
+	}
 	
+	function _exit($dbhandle){
+		$dbhandle->close();
+		exit();
+	}
 ?>

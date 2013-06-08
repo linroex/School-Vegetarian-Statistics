@@ -55,8 +55,10 @@
 				<h1>系統設定</h1>
 			</div>
 			<div class="setting content">
+				<h3>系統設定</h3>
+				<h3>系統記錄</h3>
 				
-				<h3>目前還想不到有什麼系統設定要做的...XD</h3>
+				
 			</div>
 		</div>
 		<?php notify(); ?>

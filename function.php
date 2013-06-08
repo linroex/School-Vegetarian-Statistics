@@ -7,7 +7,5 @@
 			return 1;
 		}
 	}
-	function write_log(){
 	
-	}
 ?>

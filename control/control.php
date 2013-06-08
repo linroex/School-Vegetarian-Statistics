@@ -5,11 +5,8 @@
 	
 	$users=new users($db);
 	$records=new records($db);
-
-	function _exit($dbhandle){
-		$dbhandle->close();
-		exit();
-	}
+	//insertLog($db,$user,$type,$text);
+	
 	
 	if($_POST['cmd']=='login'){
 		
@@ -20,9 +17,14 @@
 			_exit($mongo);
 		}else{
 			$_SESSION['msg']='帳號或密碼錯誤';
+			insertLog($db,$_SESSION['login_status']?$_SESSION['user']['usernm']:'guest','login error','login error');
 			header("Location:../index.php");
 			_exit($mongo);
 		}
+	}
+	
+	if(!empty($_SESSION['user']['usernm'])){
+		insertLog($db,$_SESSION['login_status']?$_SESSION['user']['usernm']:'guest',$_POST['cmd'],$_POST['cmd']);
 	}
 	
 	//防止未登入的用戶存取此頁面

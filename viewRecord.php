@@ -1,4 +1,4 @@
-<?php include('header.php') ?>
+<?php include('header.php');?>
 <!DOCTYPE HTML>
 <html lang="en-US">
 	<head>
