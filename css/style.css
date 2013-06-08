@@ -35,7 +35,7 @@ body{
 	margin:0px auto;
 }
 .editRecord .used{
-	color:red;
+	text-decoration:line-through;
 }
 .error{
 	color:red;

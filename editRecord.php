@@ -54,14 +54,17 @@
 			<div class="page-header"><h1>編輯記錄</h1></div>
 			<div class="editRecord content">
 			<table class="table" >
-				<form action="model/editRecord.php" method="post">
+				<form action="control/control.php" method="post">
+					<input type="hidden" name="semester" value="<?=$_GET['semester']?>" />
+					<input type="hidden" name="stuid" value="<?=$_GET['stuid']?>" />
+					
 					<tr>
-						<td>學號：</td>
-						<td></td>
+						<td colspan="2">學號：<?=$_GET['stuid']?></td>
+						
 					</tr>
 					<tr>
-						<td>姓名：</td>
-						<td></td>
+						<td colspan="2">姓名：XXX</td>
+						
 					</tr>
 					<tr>
 						<td colspan="2">詳細記錄：</td>
@@ -70,15 +73,16 @@
 					1.已經使用過（銷過/記功）的記錄，會用紅字標示
 					2.勾選=刪除此記錄
 					-->
+					<?php 
+						include('model/model_func.php');
+						$record=json_decode(post('control/control.php',array('stuid'=>$_GET['stuid'],'semester'=>$_GET['semester'],'login_status'=>1,'cmd'=>'getRecordInfo')),1);
+						
+						foreach($record as $temp){
+					?>
 					<tr>
-						<td colspan="2" class="used"><input type="checkbox" name="deleteRecord[]" value="20120101" /> &nbsp 2012/01/01</td>
+						 <td colspan="2" class="<?php echo $temp['used']==true?'used':''; ?>"><input type="checkbox" name="deleteRecord[]" value="<?=($temp['_id']['$id'])?>" />&nbsp<?=date('Y/m/d',$temp['date']['sec']);?>&nbsp</td>
 					</tr>
-					<tr>
-						<td colspan="2"><input type="checkbox" name="deleteRecord[]" value="20120201" /> &nbsp 2012/02/01</td>
-					</tr>
-					<tr>
-						<td colspan="2"><input type="checkbox" name="deleteRecord[]" value="20120301" /> &nbsp 2012/03/01</td>
-					</tr>
+					<?php } ?>
 					<tr>
 						<td><input type="submit" value="刪除選定記錄" class="btn btn-primary btn-block" /></td>
 						<td><input type="button" value="不變動，回前頁" class="btn btn-block" onclick="window.history.go(-1);"/></td>

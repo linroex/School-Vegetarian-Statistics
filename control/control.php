@@ -91,5 +91,9 @@
 		}
 		
 	}
+	if($_POST['cmd']=='getRecordInfo'){
+		echo json_encode($records->getRecordInfo($_POST['stuid'],$_POST['semester']));
+		_exit($mongo);
+	}
 	
 ?>

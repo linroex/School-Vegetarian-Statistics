@@ -54,10 +54,14 @@
 			return $result;
 			
 		}		
-		function getRecordInfo(){
-		
+		function getRecordInfo($stuid,$semester){
+			$stuid=secunity($stuid);
+			$semester=(int)secunity($semester);
+			return iterator_to_array($this->col_records->find(array('stuid'=>$stuid,'semester'=>$semester)));
+			
+			
 		}
-		function editRecord(){
+		function removeRecord(){
 		
 		}
 		function setRecordUsed($stuid,$semester,$surplus){
