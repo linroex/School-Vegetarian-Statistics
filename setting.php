@@ -27,7 +27,7 @@
 							</a>
 							<ul class="dropdown-menu">
 								<li><a href="addRecord.php">增加記錄</a></li>
-								<li><a href="viewRecord.php">檢視記錄</a></li>
+								<li><a href="viewRecotd.php">檢視記錄</a></li>
 							</ul>
 						</li>
 						<li class="dropdown">
@@ -57,7 +57,27 @@
 			<div class="setting content">
 				<h3>系統設定</h3>
 				<h3>系統記錄</h3>
-				
+				<?php
+					include('model/model_func.php');
+					$data=json_decode(post('control/control.php',array('cmd'=>'searchLog','login_status'=>1,'date'=>$_GET['date'],'page'=>$_GET['page'],'keyword'=>$_GET['keyword'],'user'=>$_GET['user'])),1);
+					
+				?>
+				<table class="table">
+					<tr>
+						<td>用戶</td>
+						<td>時間</td>
+						<td>來源</td>
+						<td>內容</td>
+					</tr>
+					<?php foreach($data as $data_row){ ?>
+					<tr>
+						<td><?=$data_row['user']?></td>
+						<td><?=date('Y/m/d',$data_row['date']['sec'])?></td>
+						<td><?=$data_row['ip']?></td>
+						<td><?=$data_row['text']?></td>
+					</tr>
+					<?php } ?>
+				</table>
 				
 			</div>
 		</div>

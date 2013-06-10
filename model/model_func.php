@@ -48,9 +48,19 @@
 		file_put_contents('../log.php',json_encode(array('type'=>trim($type),'text'=>trim(htmlspecialchars($text)),'date'=>new MongoDate(time()),'ip'=>get_client_ip(),'user'=>trim($user))) . "\n",FILE_APPEND);
 		return $db->log->insert(array('type'=>trim($type),'text'=>trim(htmlspecialchars($text)),'date'=>new MongoDate(time()),'ip'=>get_client_ip(),'user'=>trim($user)));
 	}
-	
-	function _exit($dbhandle){
+	function searchLog($db,$target='all',$data=''){
+		$info=secunity(array($target,$data));
+		if($info[0]=='date'){
+			
+			return iterator_to_array($db->log->find(array($info[0]=>array('$gte'=>new MongoDate(strtotime($info[1]))))));
+		}elseif($info[0]=='all'){
+			return iterator_to_array($db->log->find(array()));
+		}else{
+			return iterator_to_array($db->log->find(array($info[0]=>new MongoRegex("/{$info[1]}/"))));
+		}	
+	}
+	function _exit($dbhandle,$text=''){
 		$dbhandle->close();
-		exit();
+		exit($text);
 	}
 ?>

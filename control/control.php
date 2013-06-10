@@ -30,7 +30,8 @@
 	//防止未登入的用戶存取此頁面
 	if($_POST['login_status']!=1){
 		if(!$_SESSION['login_status']){
-			exit('Please Login');
+			
+			_exit($mongo,'Please Login');
 		}
 	}
 	
@@ -100,6 +101,10 @@
 	if($_POST['cmd']=='removeRecord'){
 		$_SESSION['msg']=$records->removeRecord($_POST['deleteRecord']);
 		header('Location:../viewRecord.php');
+		_exit($mongo);
+	}
+	if($_POST['cmd']=='searchLog'){
+		echo json_encode(searchLog($db));
 		_exit($mongo);
 	}
 ?>
