@@ -27,7 +27,7 @@
 							</a>
 							<ul class="dropdown-menu">
 								<li><a href="addRecord.php">增加記錄</a></li>
-								<li><a href="viewRecotd.php">檢視記錄</a></li>
+								<li><a href="viewRecord.php">檢視記錄</a></li>
 							</ul>
 						</li>
 						<li class="dropdown">

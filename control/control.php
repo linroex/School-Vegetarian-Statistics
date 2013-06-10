@@ -13,6 +13,7 @@
 		if($users->login($_POST['usernm'],$_POST['passwd'])){
 			$_SESSION['user']=$users->getUserInfoByAuth($_POST['usernm'],$_POST['passwd']);
 			$_SESSION['login_status']=true;
+			insertLog($db,$_SESSION['user']['usernm'],$_POST['cmd'],$_POST['cmd']);
 			header("Location:../addRecord.php");
 			_exit($mongo);
 		}else{
