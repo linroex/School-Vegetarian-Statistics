@@ -57,11 +57,21 @@
 			<div class="setting content">
 				<h3>系統設定</h3>
 				<h3>系統記錄</h3>
+				
 				<?php
 					include('model/model_func.php');
-					$data=json_decode(post('control/control.php',array('cmd'=>'searchLog','login_status'=>1,'date'=>$_GET['date'],'page'=>$_GET['page'],'keyword'=>$_GET['keyword'],'user'=>$_GET['user'])),1);
+					$count=post('control/control.php',array('cmd'=>'countLog','login_status'=>1,'date'=>$_GET['date'],'page'=>$_GET['page'],'text'=>$_GET['text'],'user'=>$_GET['user']));
+					$pagenum=ceil($count/20);
+					$data=json_decode(post('control/control.php',array('cmd'=>'searchLog','login_status'=>1,'date'=>$_GET['date'],'page'=>$_GET['page'],'text'=>$_GET['text'],'user'=>$_GET['user'])),1);
 					
 				?>
+				<div class="pagination pagination-centered">
+					<ul>
+						<?php for($i=1;$i<=$pagenum;$i++){ ?>
+							<li><a href="<?=(empty($_GET) || $_GET['page']!=''?'?page=':'&page=') . $i?>"><?=$i?></a></li>
+						<? } ?>
+					</ul>
+				</div>
 				<table class="table">
 					<tr>
 						<td>用戶</td>

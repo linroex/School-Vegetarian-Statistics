@@ -48,16 +48,25 @@
 		file_put_contents('../log.php',json_encode(array('type'=>trim($type),'text'=>trim(htmlspecialchars($text)),'date'=>new MongoDate(time()),'ip'=>get_client_ip(),'user'=>trim($user))) . "\n",FILE_APPEND);
 		return $db->log->insert(array('type'=>trim($type),'text'=>trim(htmlspecialchars($text)),'date'=>new MongoDate(time()),'ip'=>get_client_ip(),'user'=>trim($user)));
 	}
-	function searchLog($db,$target='all',$data=''){
-		$info=secunity(array($target,$data));
-		if($info[0]=='date'){
-			
-			return iterator_to_array($db->log->find(array($info[0]=>array('$gte'=>new MongoDate(strtotime($info[1]))))));
-		}elseif($info[0]=='all'){
-			return iterator_to_array($db->log->find(array()));
-		}else{
-			return iterator_to_array($db->log->find(array($info[0]=>new MongoRegex("/{$info[1]}/"))));
-		}	
+	function searchLog($db,$text='',$date='',$user='',$page=''){
+		$info=secunity(array($text,$date,$user));
+		$skip=$page==''?0:$page*20-20;
+		
+		return iterator_to_array($db->log->find(array
+		(
+			'user'=>new MongoRegex("/{$info[2]}/"),
+			'date'=>array('$gte'=>new MongoDate(strtotime($date==''?0:($date . '0:0'))),'$lte'=>new MongoDate(strtotime($date . '23:59'))),
+			'text'=>new MongoRegex("/{$info[0]}/")))->limit(20)->skip($skip)
+		);
+	}
+	function countLog($db,$text='',$date='',$user=''){
+		$info=secunity(array($text,$date,$user));
+		return (int)($db->log->find(array
+		(
+			'user'=>new MongoRegex("/{$info[2]}/"),
+			'date'=>array('$gte'=>new MongoDate(strtotime($date==''?0:($date . '0:0'))),'$lte'=>new MongoDate(strtotime($date . '23:59'))),
+			'text'=>new MongoRegex("/{$info[0]}/")))->count()
+		);
 	}
 	function _exit($dbhandle,$text=''){
 		$dbhandle->close();

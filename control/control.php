@@ -104,7 +104,11 @@
 		_exit($mongo);
 	}
 	if($_POST['cmd']=='searchLog'){
-		echo json_encode(searchLog($db));
+		echo json_encode(searchLog($db,$_POST['text'],$_POST['date'],$_POST['user'],$_POST['page']));
+		_exit($mongo);
+	}
+	if($_POST['cmd']=='countLog'){
+		echo (countLog($db,$_POST['text'],$_POST['date'],$_POST['user']));
 		_exit($mongo);
 	}
 ?>
